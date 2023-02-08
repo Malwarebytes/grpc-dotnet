@@ -16,6 +16,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Grpc.Core.Api.Utils;
@@ -29,7 +30,19 @@ internal static class EncodingExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static unsafe string GetString(this Encoding encoding, IntPtr ptr, int len)
     {
-        return len == 0 ? "" : encoding.GetString((byte*)ptr.ToPointer(), len);
+#if NET452
+        if (len == 0)
+        {
+            return string.Empty;
+        }
+        
+        // create a local copy in a fresh array
+        var arr = new byte[len];
+        Marshal.Copy(ptr, arr, 0, len);
+        return  encoding.GetString(arr, 0, len);
+#else
+        return len == 0 ? string.Empty : encoding.GetString((byte*)ptr.ToPointer(), len);
+#endif
     }
 }
 

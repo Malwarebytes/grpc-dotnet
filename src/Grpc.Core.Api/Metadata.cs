@@ -434,8 +434,11 @@ public sealed class Metadata : IList<Metadata.Entry>
                 return new Entry(key, s, null);
             }
         }
-
+#if NET452
+        static readonly byte[] EmptyByteArray = new byte[0];
+#else
         static readonly byte[] EmptyByteArray = Array.Empty<byte>();
+#endif
 
         private static string NormalizeKey(string key)
         {
