@@ -9,7 +9,7 @@
     <!-- <AssemblyVersion>$(GrpcDotnetAssemblyVersion)</AssemblyVersion> -->
     <!-- <FileVersion>$(GrpcDotnetAssemblyFileVersion)</FileVersion> -->
 
-    <!-- <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)keys\Grpc.snk</AssemblyOriginatorKeyFile> -->
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)keys\Grpc.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
